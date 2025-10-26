@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "tsx": "^4.20.6"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}
