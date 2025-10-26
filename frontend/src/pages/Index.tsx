@@ -18,26 +18,33 @@ export default function Index() {
 
   // When market selected → load contracts
   useEffect(() => {
-    if (!selected) return;
-    fetch(`/v1/contracts?market_id=${selected.market_id}`)
-      .then((res) => res.json())
-      .then(setContracts);
+  if (!selected) {
+    setContracts([]);
     setSelectedContract(null);
-    setOrderbook(null);
-    setTrades([]);
-  }, [selected]);
+    return;
+  }
+
+  fetch(`/v1/contracts?market_id=${selected.market_id}`)
+    .then((res) => res.json())
+    .then(setContracts);
+}, [selected]);
+
 
   // When contract selected → load orderbook + trades
   useEffect(() => {
-    if (!selectedContract) return;
+  if (!selectedContract) {
+    setOrderbook(null);
+    setTrades([]);
+    return;
+  }
 
-    fetch(`/v1/orderbook/${selectedContract.contract_id}`)
-      .then((res) => res.json())
-      .then(setOrderbook);
+  fetch(`/v1/orderbook/${selectedContract.contract_id}`)
+    .then((res) => res.json())
+    .then(setOrderbook);
 
-    fetch(`/v1/trades?contract_id=${selectedContract.contract_id}&limit=20`)
-      .then((res) => res.json())
-      .then(setTrades);
+  fetch(`/v1/trades?contract_id=${selectedContract.contract_id}&limit=20`)
+    .then((res) => res.json())
+    .then(setTrades);
   }, [selectedContract]);
 
   return (
@@ -49,7 +56,10 @@ export default function Index() {
         {markets.map((m) => (
           <li
             key={m.market_id}
-            onClick={() => setSelected(m)}
+            onClick={() =>
+              setSelected((prev) =>
+              prev?.market_id === m.market_id ? null : m
+                )}
             className={`p-4 rounded cursor-pointer ${
               selected?.market_id === m.market_id
                 ? "bg-blue-600"
@@ -76,7 +86,11 @@ export default function Index() {
               {contracts.map((c) => (
                 <li
                   key={c.contract_id}
-                  onClick={() => setSelectedContract(c)}
+                  onClick={() =>
+                    setSelectedContract((prev) =>
+                      prev?.contract_id === c.contract_id ? null : c
+                    )
+                  }
                   className={`p-3 rounded flex justify-between items-center cursor-pointer ${
                     selectedContract?.contract_id === c.contract_id
                       ? "bg-green-600"
