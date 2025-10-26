@@ -1,13 +1,15 @@
-// src/lib/api.ts
-async function get<T>(url: string): Promise<T> {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json() as Promise<T>;
+export async function api<T = any>(path: string): Promise<T> {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+  return res.json();
 }
 
-export const api = {
-  markets: () => get<any[]>("/v1/markets"),
-  contracts: (marketId: string) => get<any[]>(`/v1/contracts?market_id=${marketId}`),
-  orderbook: (cid: string) => get<{ bid:any[]; ask:any[] }>(`/v1/orderbook/${cid}`),
-  trades: (cid: string, limit=50) => get<any[]>(`/v1/trades?contract_id=${cid}&limit=${limit}`),
-};
+export const getMarkets = () => api("/v1/markets");
+export const getContracts = (marketId: string) =>
+  api(`/v1/contracts?market_id=${marketId}`);
+export const getOrderbook = (contractId: string) =>
+  api(`/v1/orderbook/${contractId}`);
+export const getTrades = (contractId: string, limit = 50) =>
+  api(`/v1/trades?contract_id=${contractId}&limit=${limit}`);
+export const getCandles = (contractId: string, tf = "1m", limit = 240) =>
+  api(`/v1/candles?contract_id=${contractId}&tf=${tf}&limit=${limit}`);
