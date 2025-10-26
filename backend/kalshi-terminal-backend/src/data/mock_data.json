@@ -1,0 +1,50 @@
+{
+  "markets": [
+    {
+      "market_id": "MKT004",
+      "slug": "cpi_november_yoy",
+      "title": "Inflation in November? (CPI YoY)",
+      "category": "Financials",
+      "status": "TRADING"
+    }
+  ],
+  "contracts": [
+    {
+      "contract_id": "CNT301",
+      "market_id": "MKT004",
+      "symbol": "ABOVE_3_0",
+      "display": "Above 3.0%",
+      "last_price_cents": 56,
+      "probability": 0.56,
+      "volume": 18200,
+      "open_interest": 7600,
+      "day_change_bps": 30
+    }
+  ],
+  "order_book": [
+    { "contract_id": "CNT301", "side": "BID", "level": 1, "price_cents": 55, "size": 500 },
+    { "contract_id": "CNT301", "side": "BID", "level": 2, "price_cents": 54, "size": 400 },
+    { "contract_id": "CNT301", "side": "ASK", "level": 1, "price_cents": 57, "size": 450 },
+    { "contract_id": "CNT301", "side": "ASK", "level": 2, "price_cents": 58, "size": 380 }
+  ],
+  "trades": [
+    { "trade_id": "T000001", "ts": "2025-10-25T16:00:00Z", "contract_id": "CNT301", "side": "BUY", "price_cents": 56, "size": 100, "aggressor": "BUYER" },
+    { "trade_id": "T000002", "ts": "2025-10-25T16:01:00Z", "contract_id": "CNT301", "side": "SELL", "price_cents": 55, "size": 50, "aggressor": "SELLER" }
+  ],
+  "candles": [
+    { "contract_id": "CNT301", "timeframe": "1m", "ts": "2025-10-25T15:58:00Z", "open_cents": 55, "high_cents": 56, "low_cents": 54, "close_cents": 55, "volume": 500 },
+    { "contract_id": "CNT301", "timeframe": "1m", "ts": "2025-10-25T15:59:00Z", "open_cents": 55, "high_cents": 57, "low_cents": 55, "close_cents": 56, "volume": 420 }
+  ],
+  "news": [
+    { "news_id": "N001", "ts": "2025-10-25T15:35:00Z", "headline": "CPI survey hints at sticky services inflation", "source": "MacroWire", "url": "https://example.com/1", "related_market_ids": "MKT004" }
+  ],
+  "calendar": [
+    { "event_id": "E001", "ts": "2025-11-06T13:30:00Z", "name": "US CPI Release (Nov)", "category": "Economics", "importance": "HIGH", "related_markets": "MKT004" }
+  ],
+  "portfolio": [
+    { "user_id": "USER_DEMO", "cash_cents": 250000, "pnl_day_cents": 1250, "pnl_total_cents": 8200 }
+  ],
+  "positions": [
+    { "user_id": "USER_DEMO", "market_id": "MKT004", "contract_id": "CNT301", "avg_price_cents": 48, "qty": 1200, "unrealized_pnl_cents": 9600 }
+  ]
+}
